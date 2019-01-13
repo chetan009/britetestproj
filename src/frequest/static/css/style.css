@@ -1,0 +1,51 @@
+﻿@charset "utf-8";
+
+.content-main{
+  height:100%;
+  width:100%;
+  position: absolute;
+}
+
+.nw {
+  text-decoration: none !important;
+  text-color:"#ffffff";
+  color: "#ffffff";
+}
+
+.hr{
+  height: 3px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.row{
+  margin-right: 0px;
+  margin-left: 0px;
+  flex: 1;
+  display: flex;
+  flex-wrap:nowrap;
+  flex-direction: column;
+}
+
+body{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.form-group{
+  clear:both;
+}
+
+.field-label{
+  font-size: 18px;
+  margin-left: 15px;
+  white-space: nowrap;
+}
+
+.field-control{
+ float: right;
+ margin-right: 50px;
+ min-width: 260px;
+}

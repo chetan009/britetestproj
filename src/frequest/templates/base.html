@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Feature Requests APP</title>
+  <link href="{{ url_for('static', filename='vendor/b4.0/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  {% block script %}
+  <script src="{{ url_for('static', filename='vendor/jq/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/b4.0/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% endblock script %}
+</head>
+<body>
+{% macro get_flash_msg() %}
+   {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+       {% if "WARNING" in message %}
+          <div class="alert alert-warning">
+       {% elif "ERROR" in message or "Please" in message %}
+          <div class="alert alert-danger">
+       {% else %}
+           <div class="alert alert-success">
+       {% endif %}
+               {{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+{% endmacro %}
+
+{% macro render_form(form, heading) %}
+            {{ form.csrf_token }}
+            <div class="col-md-6 border border-dark rounded bg-light" style="margin-left: 20%">
+            <div class="row h2 mb-2 ml-5 pl-5" id="heading">
+                {{ heading }}
+            </div>
+            <div class="border hr mb-2 "></div>
+
+            <div class="row">
+               <div id="errorMessage" class="errorMgs">
+                {{ get_flash_msg() }}
+               </div>
+            </div>
+            {% for s in form._fields.values() %}
+              {% if s.type not in ["CSRFTokenField"] %}
+            <div class="row">
+              <div class="form-group ml-1">
+                <label class="col-sm-3 field-label" style="align=justified; font-size: 18px">
+                     {{ s.label.text }}
+                </label>
+                <div class="col-sm-5" style="display: inline-block" >
+                    {{ s(class='form-control', style="border: 1px solid #1e141a") }}
+
+                  <ul>
+                      {% for e in s.errors %}
+                         <li style="font-size: 11px; color:red;"> {{ e }} </li>
+                      {% endfor %}
+                  </ul>
+                </div>
+              {% if s.label.text == "Client" %}
+                <div class="col-sm-2">
+                    <a href="{{ url_for('client') }}" class="btn btn-md btn-success nw"> Add New Client </a>
+                </div>
+              {% endif %}
+              </div>
+
+            </div>
+
+             {% endif %}
+            {% endfor %}
+            <div class="form-group ml-5" style="width=50%">
+                 <input type="submit" id="submit" class="btn btn-md btn-success" />
+
+                 <div id="cancel" class="btn btn-md btn-danger" onclick="cancel();">
+                    Cancel</div>
+            </div>
+            </div>
+  {% endmacro %}
+
+{% block body %}
+{% endblock body %}
+
+{% block footer %}
+<div class="page-footer">
+
+</div>
+{% endblock footer %}
+
+</body>
+</html>
