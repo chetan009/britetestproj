@@ -1,5 +1,8 @@
 # britetestproj
 
+Requirements:-
+  1. This code is written by considerind Python 3.6, Flask, SQLALchemy, Ubuntu, Jquery, Javascript  as base.
+
 Deployment Steps
  
   1. Create a virtual Enviornment in which we can install required packages for this project. All changes will be done only in this Enviornment.
